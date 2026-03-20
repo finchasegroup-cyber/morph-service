@@ -1,6 +1,5 @@
 Flask
 gunicorn
-pymorphy2
-pymorphy2-dicts-ru
+pymorphy3
 cachetools
 setuptools
