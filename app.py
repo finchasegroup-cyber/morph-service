@@ -1,10 +1,10 @@
 import os
 from flask import Flask, request, jsonify
-import pymorphy3
+from pymorphy3 import MorphAnalyzer
 from cachetools import TTLCache
 
 app = Flask(__name__)
-morph = pymorphy3.MorphAnalyzer()
+morph = MorphAnalyzer()
 
 cache = TTLCache(maxsize=10000, ttl=43200)
 
