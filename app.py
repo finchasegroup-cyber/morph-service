@@ -6,10 +6,8 @@ from cachetools import TTLCache
 app = Flask(__name__)
 morph = pymorphy2.MorphAnalyzer()
 
-# Кеш на 10 000 фраз на 12 часов
 cache = TTLCache(maxsize=10000, ttl=43200)
 
-# Пользовательский словарь (можно дополнять)
 CUSTOM_DICT = {
     "генеральный директор": "генерального директора",
     "действующий на основании устава": "действующего на основании устава",
@@ -36,17 +34,14 @@ def decline_fio(text):
 
 def decline_phrase(text):
     text_l = text.lower().strip()
-    
-    # 1. Словарь
+
     if text_l in CUSTOM_DICT:
         return CUSTOM_DICT[text_l]
-    
-    # 2. ФИО (три слова)
+
     fio = decline_fio(text)
     if fio:
         return fio
-    
-    # 3. Общий случай
+
     words = text.split()
     result = [decline_word(w) for w in words]
     return " ".join(result)
@@ -57,7 +52,6 @@ def decline():
     if not data:
         return jsonify({"error": "no json"}), 400
 
-    # Batch-режим
     if "texts" in data:
         results = []
         for text in data["texts"]:
@@ -69,7 +63,6 @@ def decline():
                 results.append(declined)
         return jsonify({"results": results})
 
-    # Одиночный режим
     text = data.get("text")
     if not text:
         return jsonify({"error": "no text"}), 400
