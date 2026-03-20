@@ -2,4 +2,5 @@ Flask
 pymorphy2
 cachetools
 gunicorn
-setuptools
+setuptools>=65.0.0
+wheel
