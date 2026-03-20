@@ -2,3 +2,4 @@ Flask
 pymorphy2
 cachetools
 gunicorn
+setuptools
