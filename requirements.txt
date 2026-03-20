@@ -1,6 +1,6 @@
 Flask
 pymorphy2
+pymorphy2-dicts-ru
 cachetools
 gunicorn
-setuptools>=65.0.0
-wheel
+setuptools
